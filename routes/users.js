@@ -19,8 +19,11 @@ router.post(
         username,
       });
       const registeredUser = await User.register(user, password);
-      req.flash("success", "Welcome to Yelp Camp!");
-      res.redirect("/campgrounds");
+      req.login(registeredUser, (err) => {
+        if (err) return next(err);
+        req.flash("success", "Welcome to Yelp Camp!");
+        res.redirect("/campgrounds");
+      });
     } catch (e) {
       req.flash("error", e.message);
       res.redirect("/register");
@@ -42,8 +45,8 @@ router.post(
 );
 
 router.get("/logout", (req, res) => {
-  req.logOut(req, (err) => {
-    if (err) return next(new ExpressError("You must be signed in", 401));
+  req.logout(req, (err) => {
+    if (err) return next(err);
     req.flash("success", "See you soon!");
     res.redirect("/campgrounds");
   });
