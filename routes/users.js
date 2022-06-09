@@ -3,6 +3,7 @@ const passport = require("passport");
 const router = express.Router();
 const catchAsync = require("../utils/catchAsync");
 const User = require("../models/user");
+const ExpressError = require("../utils/ExpressError");
 
 router.get("/register", (req, res) => {
   res.render("users/register");
@@ -39,5 +40,13 @@ router.post(
     res.redirect("/campgrounds");
   }
 );
+
+router.get("/logout", (req, res) => {
+  req.logOut(req, (err) => {
+    if (err) return next(new ExpressError("You must be signed in", 401));
+    req.flash("success", "See you soon!");
+    res.redirect("/campgrounds");
+  });
+});
 
 module.exports = router;
