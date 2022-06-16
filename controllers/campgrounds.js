@@ -42,10 +42,7 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateCampground = async (req, res) => {
   const { id } = req.params;
-  // if (!campground.author.equals(req.user._id)) {
-  //   req.flash("error", "You do not have permission to do that");
-  //   return res.redirect(`/campgrounds/${id}`);
-  // }
+  console.log(req.body);
   const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
   const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
   campground.images.push(...imgs);
