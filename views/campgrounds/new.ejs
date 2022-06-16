@@ -25,12 +25,15 @@
             Please enter a Location.
           </div>
         </div>
-        <div class="form-file">
-          <input type="file" class="form-file-input" id="image" name="image" multiple>
-          <label for="image" class="form-file-label">
-          </label>
+        <div class="mb-3">
+          <label class="form-label">Choose Image(s)</label>
+          <div class="form-file custom-file">
+            <input class="form-control custom-file-input" type="file" id="image" name="image" multiple
+              onchange="previewMultiple(event)">
+            <label for="image" class="form-label custom-file-label"></label>
+          </div>
+          <div id="formFile"></div>
         </div>
-        <!-- <input type="file" name="image" multiple> -->
         <div class="mb-3">
           <label class="form-label" for="price">Campground Price</label>
 
