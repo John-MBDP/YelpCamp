@@ -2,6 +2,8 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
+
+
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -22,6 +24,8 @@ const morgan = require("morgan");
 const userRoutes = require("./routes/users");
 const campgroundsRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
+
+// const dbUrl = process.env.DB_URL
 
 mongoose.connect("mongodb://localhost:27017/yelp-camp", {
   useNewUrlParser: true,
